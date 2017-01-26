@@ -8,7 +8,7 @@ from uuid import uuid4
 from molotov import scenario
 
 
-_SERVER = os.getenv('SERVER', 'https://stubattribution.stage.mozaws.net')
+_SERVER = os.getenv('SERVER', 'https://stubattribution-default.stage.mozaws.net/')
 _HMAC_KEY = os.getenv('HMAC_KEY', default=None)
 
 
