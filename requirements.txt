@@ -3,4 +3,4 @@ pytest-selenium==1.7.0
 pytest-variables==1.4
 pytest-xdist==1.15.0
 flake8
-molotov==0.1
+molotov==0.3
