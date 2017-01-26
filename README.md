@@ -11,8 +11,7 @@ generic load test based on ailoads: https://github.com/loads/ailoads
 
 ### For STAGE 
 
-    make test -e URL_SERVER=https://[url]
-
+    molotov -cx -d 1 loadtest.py
 
 ## How to build the docker image?
 
