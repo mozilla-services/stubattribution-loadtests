@@ -22,7 +22,7 @@ def signed_codes():
         ('timestamp', str(int(time()))),
     )
     code = '&'.join('='.join(attr) for attr in codes)
-    code = querystringsafe_base64.encode(code)
+    code = querystringsafe_base64.encode(code.encode())
     sig = hmac.new(_HMAC_KEY.encode(), code.encode(), hashlib.sha256).hexdigest()
     return code, sig
 
