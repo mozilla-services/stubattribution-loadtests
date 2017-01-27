@@ -4,3 +4,4 @@ pytest-variables==1.4
 pytest-xdist==1.15.0
 flake8
 molotov==0.3
+querystringsafe_base64==0.2.0
