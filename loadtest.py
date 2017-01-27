@@ -33,7 +33,9 @@ async def scenario_one(session):
         raise RuntimeError('No HMAC_KEY set')
 
     code, sig = signed_codes()
-    url = ('{}/?product=test-stub&os=win&lang=en-US'
-           '&attribution_code={}&attribution_sig={}').format(_SERVER, code, sig)
-    async with session.get(url) as resp:
+    params = [('product', 'test-stub'), ('os', 'win'),
+              ('lang', 'en-US'), ('attribution_code', code),
+              ('attribution_sig', sig)]
+
+    async with session.get(_SERVER, params=params) as resp:
         assert resp.status == 200
