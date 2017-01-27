@@ -15,7 +15,7 @@ _HMAC_KEY = os.getenv('HMAC_KEY', default=None)
 def signed_codes():
     # random data
     codes = (
-        ('source', '(not set)'),
+        ('source', 'google'),
         ('medium', str(uuid4())),
         ('campaign', '(not set)'),
         ('content', '(not set)'),
