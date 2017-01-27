@@ -1,5 +1,6 @@
-[![travis](https://img.shields.io/travis/stephendonner/stubattribution-loadtests.svg?label=travis)](http://travis-ci.org/stephendonner/stubattribution-loadtests/)
-[![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/stephendonner/stubattribution-loadtests/issues)
+[![Build Status](https://travis-ci.org/stephendonner/stubattribution-loadtests.svg?branch=master)](https://travis-ci.org/stephendonner/stubattribution-loadtests)
+[![updates](https://pyup.io/repos/github/stephendonner/stubattribution-loadtests/shield.svg)](https://pyup.io/repos/github/stephendonner/stubattribution-loadtests/)
+[![Python 3](https://pyup.io/repos/github/stephendonner/stubattribution-loadtests/python-3-shield.svg)](https://pyup.io/repos/github/stephendonner/stubattribution-loadtests/)
 
 
 # stubattribution-loadtests
