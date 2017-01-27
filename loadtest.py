@@ -33,7 +33,7 @@ async def scenario_one(session):
         raise RuntimeError('No HMAC_KEY set')
 
     code, sig = signed_codes()
-    url = ('{}/?product=firefox-stub&os=win&lang=en-US'
+    url = ('{}/?product=test-stub&os=win&lang=en-US'
            '&attribution_code={}&attribution_sig={}').format(_SERVER, code, sig)
     async with session.get(url) as resp:
         assert resp.status == 200
