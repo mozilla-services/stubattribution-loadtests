@@ -1,4 +1,5 @@
 [![travis](https://img.shields.io/travis/stephendonner/stubattribution-loadtests.svg?label=travis)](http://travis-ci.org/stephendonner/stubattribution-loadtests/)
+[![GitHub issues](https://img.shields.io/github/issues/badges/shields.svg)](https://github.com/stephendonner/stubattribution-loadtests/issues)
 
 
 # stubattribution-loadtests
