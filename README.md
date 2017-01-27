@@ -1,3 +1,6 @@
+[![travis](https://img.shields.io/travis/stephendonner/stubattribution-loadtests.svg?label=travis)](http://travis-ci.org/stephendonner/stubattribution-loadtests/)
+
+
 # stubattribution-loadtests
 
 generic load test based on ailoads: https://github.com/loads/ailoads
