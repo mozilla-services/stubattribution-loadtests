@@ -31,4 +31,3 @@ generic load test based on ailoads: https://github.com/loads/ailoads
 ## How to clean the repository?
 
     make clean
-# stubattribution-loadtests
