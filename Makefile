@@ -1,3 +1,10 @@
+#!make
+
+# load env vars
+include loadtest.env
+export $(shell sed 's/=.*//' loadtest.env)
+
+
 OS := $(shell uname)
 HERE = $(shell pwd)
 PYTHON = python3
@@ -8,31 +15,30 @@ VENV_PIP = $(BIN)/pip3
 VENV_PYTHON = $(BIN)/python
 INSTALL = $(VENV_PIP) install
 
-URL_STUBATTRIBUTION_SERVER = https://stubattribution.stage.mozaws.net
-
 .PHONY: all check-os install-elcapitan install build
-.PHONY: configure 
+.PHONY: configure
 .PHONY: docker-build docker-run docker-export
-.PHONY: test test-heavy refresh clean
+.PHONY: test test-heavy clean clean-env
 
-all: build setup_random configure 
+all: build setup_random configure
 
 
-# hack for OpenSSL problems on OS X El Captain: 
+# hack for OpenSSL (cryptography) w/ OS X El Captain:
+# must run make as sudo on OSX
 # https://github.com/phusion/passenger/issues/1630
 check-os:
 ifeq ($(OS),Darwin)
   ifneq ($(USER),root)
     $(info "clang now requires sudo, use: sudo make <target>.")
     $(info "Aborting!") && exit 1
-  endif  
+  endif
   BREW_PATH_OPENSSL=$(shell brew --prefix openssl)
 endif
 
-install-elcapitan: check-os 
+install-elcapitan: check-os
 	env LDFLAGS="-L$(BREW_PATH_OPENSSL)/lib" \
 	    CFLAGS="-I$(BREW_PATH_OPENSSL)/include" \
-	    $(INSTALL) cryptography 
+	    $(INSTALL) cryptography
 
 $(VENV_PYTHON):
 	virtualenv $(VTENV_OPTS) venv
@@ -42,33 +48,35 @@ install:
 
 build: $(VENV_PYTHON) install-elcapitan install
 
-clean-env: 
-	@rm -f loadtest.env
-	
-
 configure: build
+	if [[ ! -w loadtest.env ]]; then touch loadtest.env; fi
 	@bash loads.tpl
 
 
-#bash -c "source loadtest.env && URL_STUBATTRIBUTION_SERVER=$(URL_STUBATTRIBUTION_SERVER) $(BIN)/ailoads -v -d 30"
-test: build
-	bash -c "URL_STUBATTRIBUTION_SERVER=$(URL_STUBATTRIBUTION_SERVER) $(BIN)/ailoads -v -d 30"
-	$(BIN)/flake8 loadtest.py
+test:
+	bash -c "$(BIN)/molotov -c -d $(TEST_DURATION) ./loadtest.py"
 
-test-heavy: build
-	bash -c "source loadtest.env && URL_STUBATTRIBUTION_SERVER=$(URL_STUBATTRIBUTION_SERVER) $(BIN)/ailoads -v -d 300 -u 10"
+test-heavy:
+	bash -c "$(BIN)/molotov -c -d $(TEST_HEAVY_DURATION) \
+                                   -w $(TEST_HEAVY_WORKERS) ./loadtest.py"
 
 
 docker-build:
-	docker build -t stubattribution/loadtest .
+	bash -c "docker build -t $(NAME_DOCKER_IMG) .  --build-arg URL_TEST_REPO=$(URL_TEST_REPO) --build-arg NAME_TEST_REPO=$(NAME_TEST_REPO) --build-arg TEST_DURATION=$(TEST_DURATION) --build-arg TEST_CONNECTIONS=$(TEST_CONNECTIONS)"
 
 docker-run:
-	bash -c "source loadtest.env; docker run -e TEST_DURATION=30 -e CONNECTIONS=4 stubattribution/loadtest"
+	#bash -c "docker run -e URL_TESTS=$(URL_TEST_REPO) \
+        #                    -e TEST_DURATION=$(TEST_DURATION) \
+        #                    -e TEST_CONNECTIONS=$(TEST_CONNECTIONS) $(NAME_DOCKER_IMG)"
+	bash -c "docker run -t $(NAME_DOCKER_IMG)"
 
 docker-export:
-	docker save "stubattribution/loadtest:latest" | bzip2> stubattribution-latest.tar.bz2
+	docker save "$(NAME_DOCKER_IMG)" | bzip2> $(PROJECT_NAME)-latest.tar.bz2
 
 
-clean: refresh
-	@rm -fr venv/ __pycache__/ loadtest.env
+clean-env:
+	@cp loadtest.env loadtest.env.OLD
+	@rm -f loadtest.env
 
+clean:
+	@rm -fr venv/ __pycache__/

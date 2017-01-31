@@ -3,7 +3,7 @@ source loadtest.env && \
 echo "Building loads.json" && \
 cat > loads.json <<EOF
 {
-  "name": "Shavar Server Testing",
+  "name": "Stub Attribution Server Testing",
   "plans": [
 
     {
@@ -11,19 +11,19 @@ cat > loads.json <<EOF
       "description": "4 boxes",
       "steps": [
         {
-          "name": "Shavar: Test Cluster",
+          "name": "Stub Attribution: Test Cluster",
           "instance_count": 4,
           "instance_region": "us-east-1",
           "instance_type": "m3.medium",
           "run_max_time": 600,
-          "container_name": "rpappalax/ailoads-shavar:latest",
+          "container_name": "stephendonner/stubattribution-loadtests:latest",
           "environment_data": [
-            "URL_SHAVAR_SERVER=https://shavar.stage.mozaws.net/downloads",
+            "URL_SHAVAR_SERVER=https://stubattribution-default.stage.mozaws.net",
             "CONNECTIONS=100",
             "TEST_DURATION=600"
           ],
           "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
-          "docker_series": "shavar_tests
+          "docker_series": "stubattribution-loadtests"
         }
       ]
     }
