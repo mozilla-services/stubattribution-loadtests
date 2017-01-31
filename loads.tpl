@@ -18,7 +18,7 @@ cat > loads.json <<EOF
           "run_max_time": 600,
           "container_name": "stephendonner/stubattribution-loadtests:latest",
           "environment_data": [
-            "URL_SHAVAR_SERVER=https://stubattribution-default.stage.mozaws.net",
+            "URL_STUBATTRIBUTION_SERVER=https://stubattribution-default.stage.mozaws.net",
             "CONNECTIONS=100",
             "TEST_DURATION=600"
           ],
