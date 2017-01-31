@@ -15,4 +15,4 @@ WORKDIR /molotov
 ADD . /molotov
 
 # run the test
-CMD molotov -cxv -d $TEST_DURATION -w $TEST_CONNECTIONS loadtest.py
+CMD molotov -cxv -p $PROCESSES -d $TEST_DURATION -w $TEST_CONNECTIONS loadtest.py
