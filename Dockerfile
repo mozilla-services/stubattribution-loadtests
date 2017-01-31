@@ -1,31 +1,18 @@
 # Mozilla Load-Tester
-FROM ubuntu
+FROM python:3.5-slim
 
 ARG URL_TEST_REPO
 ARG NAME_TEST_REPO
 ARG TEST_DURATION
 ARG TEST_CONNECTIONS
 
-WORKDIR /home/loads
-RUN \
-    apt-get update -y; \
-    apt-get upgrade -y; \
-    apt-get install -y libssl-dev libffi-dev; \
-    apt-get install -y python3-dev python3-pip python3-venv; \
-    apt-get install -y  git-core build-essential make; \
-    apt-get autoremove -y -qq; \
-    apt-get clean -y; \
-    pip3 install --upgrade pip; \
-    pip3 install virtualenv; \
-    git clone $URL_TEST_REPO; \
-    cd $NAME_TEST_REPO; \
-    #make build -e PYTHON=python3; \
-    #apt-get remove -y -qq git build-essential make python3-pip python3-venv libssl-dev libffi-dev; \
-    virtualenv venv -p python3; \
-    . venv/bin/activate; \
-    make build;
+# deps
+RUN apt-get update
+RUN pip3 install https://github.com/loads/molotov/archive/master.zip
+RUN pip3 install querystringsafe_base64==0.2.0
+
+WORKDIR /molotov
+ADD . /molotov
 
 # run the test
-#CMD ["/home/loads/stubattribution-loadtests/venv/bin/molotov", "-v", "-d", "$TEST_DURATION", "-u", "$TEST_CONNECTIONS"]
-#CMD ["venv/bin/molotov", "-v", "-d", "$TEST_DURATION", "-u", "$TEST_CONNECTIONS"]
-CMD ["stubattribution-loadtests/venv/bin/molotov", "-v", "-d", "$TEST_DURATION", "-u", "$TEST_CONNECTIONS"]
+CMD molotov -cxv -d $TEST_DURATION -w $TEST_CONNECTIONS loadtest.py
