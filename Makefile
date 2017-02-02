@@ -60,22 +60,14 @@ test-heavy:
 	bash -c "$(BIN)/molotov -c -d $(TEST_HEAVY_DURATION) \
                                    -w $(TEST_HEAVY_WORKERS) ./loadtest.py"
 
-
-HMAC_KEY = somekey
-URL_TEST_REPO = blah
-TEST_DURATION = 1
-TEST_CONNECTIONS = 2
-PROCESSES = 2
-
 docker-build:
-	bash -c "docker build -t $(NAME_DOCKER_IMG) .  --build-arg URL_TEST_REPO=$(URL_TEST_REPO) --build-arg NAME_TEST_REPO=$(NAME_TEST_REPO) --build-arg TEST_DURATION=$(TEST_DURATION) --build-arg TEST_CONNECTIONS=$(TEST_CONNECTIONS)"
+	bash -c "docker build -t $(NAME_DOCKER_IMG) .  --build-arg URL_TEST_REPO=$(URL_TEST_REPO) --build-arg NAME_TEST_REPO=$(NAME_TEST_REPO)"
 
 docker-run:
-	bash -c "docker run -e URL_TESTS=$(URL_TEST_REPO) \
-                            -e HMAC_KEY=$(HMAC_KEY) \
-                            -e TEST_DURATION=$(TEST_DURATION) \
-                            -e PROCESSES=$(PROCESSES) \
-                            -e TEST_CONNECTIONS=$(TEST_CONNECTIONS) $(NAME_DOCKER_IMG)"
+	bash -c "docker run -e HMAC_KEY=$(HMAC_KEY) \
+                         -e TEST_DURATION=$(TEST_DURATION) \
+                         -e TEST_PROCESSES=$(TEST_PROCESSES) \
+                         -e TEST_CONNECTIONS=$(TEST_CONNECTIONS) $(NAME_DOCKER_IMG)"
 
 docker-export:
 	docker save "$(NAME_DOCKER_IMG)" | bzip2> $(PROJECT_NAME)-latest.tar.bz2
