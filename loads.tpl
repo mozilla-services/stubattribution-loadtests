@@ -16,7 +16,7 @@ cat > loads.json <<EOF
           "instance_region": "us-east-1",
           "instance_type": "m3.medium",
           "run_max_time": 600,
-          "container_name": "stephendonner/stubattribution-loadtests:latest",
+          "container_name": "firefoxtesteng/stubattribution-loadtests:latest",
           "environment_data": [
             "URL_STUBATTRIBUTION_SERVER=https://stubattribution-default.stage.mozaws.net",
             "CONNECTIONS=100",
