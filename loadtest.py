@@ -8,7 +8,7 @@ import querystringsafe_base64
 from molotov import scenario
 
 
-_SERVER = os.getenv('SERVER', 'https://stubattribution-default.stage.mozaws.net/')
+_SERVER = os.getenv('URL_SERVER', 'https://stubattribution-default.stage.mozaws.net/')
 _HMAC_KEY = os.environ['HMAC_KEY']
 
 
