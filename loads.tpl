@@ -19,7 +19,9 @@ cat > loads.json <<EOF
           "container_name": "firefoxtesteng/stubattribution-loadtests:latest",
           "environment_data": [
             "URL_STUBATTRIBUTION_SERVER=https://stubattribution-default.stage.mozaws.net",
-            "CONNECTIONS=100",
+            "TEST_CONNECTIONS=100",
+            "HMAC_KEY=${HMAC_KEY}",
+            "TEST_PROCESSES=10",
             "TEST_DURATION=600"
           ],
           "volume_mapping": "/var/log:/var/log/$RUN_ID:rw",
