@@ -16,7 +16,7 @@ generic load test based on molotov: https://github.com/loads/molotov
 
 ### For STAGE 
 
-    molotov -cx -d 1 loadtest.py
+    molotov -c -d 1 loadtest.py
 
 ## How to build the docker image?
 
