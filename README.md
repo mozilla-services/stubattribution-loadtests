@@ -20,7 +20,7 @@ generic load test based on molotov: https://github.com/loads/molotov
 
 ## How to build the docker image?
 
-    make docker-build
+    sudo make docker-build
 
 
 ## How to run the docker image?
