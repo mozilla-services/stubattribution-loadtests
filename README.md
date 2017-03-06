@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/stephendonner/stubattribution-loadtests.svg?branch=master)](https://travis-ci.org/stephendonner/stubattribution-loadtests)
-[![updates](https://pyup.io/repos/github/stephendonner/stubattribution-loadtests/shield.svg)](https://pyup.io/repos/github/stephendonner/stubattribution-loadtests/)
-[![Python 3](https://pyup.io/repos/github/stephendonner/stubattribution-loadtests/python-3-shield.svg)](https://pyup.io/repos/github/stephendonner/stubattribution-loadtests/)
+[![Build Status](https://travis-ci.org/mozilla-services/stubattribution-loadtests.svg?branch=master)](https://travis-ci.org/mozilla-services/stubattribution-loadtests)
+[![Updates](https://pyup.io/repos/github/mozilla-services/stubattribution-loadtests/shield.svg)](https://pyup.io/repos/github/mozilla-services/stubattribution-loadtests/)
+[![Python 3](https://pyup.io/repos/github/mozilla-services/stubattribution-loadtests/python-3-shield.svg)](https://pyup.io/repos/github/mozilla-services/stubattribution-loadtests/)
 
 
 # stubattribution-loadtests
