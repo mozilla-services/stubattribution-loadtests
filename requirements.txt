@@ -1,3 +1,3 @@
 flake8==3.5.0
 molotov==1.4
-querystringsafe_base64==1.0.0
+querystringsafe_base64==1.1.1
